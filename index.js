@@ -6,7 +6,7 @@ const http = require('http');
 
 // Configura o cliente Redis
 const redis = new Redis({
-  host: '172.17.0.2',  // Redis rodando localmente
+  host: 'redis',  // Redis rodando localmente
   port: 6379,         // Porta padrão do Redis
 });
 
