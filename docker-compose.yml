@@ -1,0 +1,24 @@
+version: "3.3"  # Versão 3.3 que é amplamente suportada
+
+services:
+  redis:
+    image: redis:alpine      # Usando a imagem oficial do Redis (Alpine)
+    container_name: redis    # Nome do container Redis
+    ports:
+      - "6379:6379"          # Mapeando a porta 6379
+    networks:
+      - default              # Usando a rede padrão do Docker Compose
+
+  node-app-cache:
+    build: .                 # Indica que o Dockerfile está no diretório atual
+    container_name: node-app-cache  # Nome do container da aplicação
+    ports:
+      - "8081:8081"          # Mapeando a porta 8081
+    depends_on:
+      - redis                # Garante que o Redis seja iniciado antes
+    networks:
+      - default              # Usando a rede padrão do Docker Compose
+    environment:
+      REDIS_HOST: redis      # Definindo o nome do serviço Redis como variável de ambiente
+
+# Rede padrão do Docker Compose será usada automaticamente
