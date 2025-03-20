@@ -54,7 +54,7 @@ const cacheMiddleware = (cacheKey, ttl) => async (req, res, next) => {
 
 // Rota que retorna um texto fixo, cacheado por 10 segundos
 app.get('/texto_fixo', cacheMiddleware('cache:texto_fixo', 10), (req, res) => {
-  const responseData = "Texto fixo!";
+  const responseData = "Texto fixo! Node JS";
   redis.setex(res.cacheKey, res.ttl, responseData);
   res.send(responseData);
 });
@@ -62,7 +62,7 @@ app.get('/texto_fixo', cacheMiddleware('cache:texto_fixo', 10), (req, res) => {
 // Rota que retorna o horário atual, cacheado por 10 segundos
 app.get('/hora', cacheMiddleware('cache:hora', 10), (req, res) => {
   const currentTime = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
-  const responseData = `Horário atual: ${currentTime}`;
+  const responseData = `Horário atual: ${currentTime} NodeJS`;
   redis.setex(res.cacheKey, res.ttl, responseData);
   res.send(responseData);
 });
